@@ -25,3 +25,14 @@ class Ques4(models.Model):
     email = models.CharField(max_length=1000)
     bio = models.CharField(max_length=1000)
     age = models.CharField(max_length=1000)
+
+class Datascraped(models.Model):
+    
+    Institute = models.CharField(max_length =100,null = True)
+    Academic = models.CharField(max_length =100,null = True)
+    Quota = models.CharField(max_length =100,null = True)
+    SeatType = models.CharField(max_length =100,null = True)
+    OpeningRank = models.IntegerField(null = True)
+    ClosingRank  = models.IntegerField(null=True)
+    Year = models.IntegerField(null=True)
+    Round = models.IntegerField(null = True)

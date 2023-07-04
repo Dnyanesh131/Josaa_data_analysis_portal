@@ -3,6 +3,7 @@ from .models import Ques1
 from .models import Ques2
 from .models import Ques3
 from .models import Ques4
+from .models import Datascraped
 from import_export.admin import ImportExportModelAdmin
 
 # Register your models here.
@@ -11,5 +12,6 @@ from import_export.admin import ImportExportModelAdmin
 @admin.register(Ques2)
 @admin.register(Ques3)
 @admin.register(Ques4)
+@admin.register(Datascraped)
 class ViewAdmin(ImportExportModelAdmin):
     pass

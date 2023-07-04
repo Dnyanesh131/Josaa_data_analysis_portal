@@ -9,7 +9,7 @@ def aboutQues4(request):
     labels=[]
     data = []
 
-    queryset = Ques4.objects.order_by('age')[:5]
+    queryset = Ques4.objects.order_by('age')[:6]
     for person in queryset:
         labels.append(person.name)
         data.append(person.age)
