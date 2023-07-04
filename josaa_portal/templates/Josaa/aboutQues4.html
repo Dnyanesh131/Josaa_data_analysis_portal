@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <div style="height: 1000px;width: 700px;display:block;margin:110px auto;">
+        <canvas id="myChart" ></canvas>
+      </div>
+      
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      
+      <script>
+
+        var df = {{data}};
+        var df1 = {{labels}};
+        const ctx = document.getElementById('myChart');
+      
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels:df1,
+            datasets: [{
+              label: 'age',
+              data: df,
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+      </script>
+      
+
+</body>
+</html>
