@@ -1,0 +1,314 @@
+{% extends "Josaa/base.html" %}
+
+{% block content %}
+<head>
+    
+    
+    
+
+    <style>
+         
+        #chart-container {
+            position: relative;
+            height: 90vh;
+            width: 80%;
+            overflow: hidden;
+            }
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to { 
+                transform: rotate(360deg);
+            }
+        }
+
+        @-webkit-keyframes rotate {
+            from {
+                -webkit-transform: rotate(0deg);
+            }
+            to { 
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        
+        
+
+     .text{
+      font-size:2.8vw;
+     }
+    
+     .chartBox{
+    
+      width:70vw;
+      
+     }
+     .chart{
+      height:100%;
+     }
+     @media  screen and (max-width:800px){
+      .chartBox{
+        width:500px;
+        
+      }
+     } 
+     @media  screen and (max-width:650px){
+      .chartBox{
+        width:430px;
+        
+      }
+     } 
+     @media  screen and (max-width:570px){
+      .chartBox{
+        width:370px;
+        
+      }
+     } 
+     @media  screen and (max-width:470px){
+      .chartBox{
+        width:320px;
+        
+      }
+      .chart{
+        height:100px;
+      }
+     } 
+     @media  screen and (max-width:418px){
+      .chartBox{
+        width:270px;
+        
+      }
+      .chart{
+        height:100px;
+      }
+     } 
+     @media  screen and (max-width:370px){
+      .chartBox{
+        width:230px;
+        
+      }
+      .chart{
+        height:100px;
+      }
+     } 
+    </style>
+   
+
+</head>
+<body>
+   
+
+    <div class="load"></div>
+    <div id="fade">
+        <h2 class="font-bold " style="font-size:2.1vw;"> What is the trend in the opening and closing ranks for popular branches?</h2>
+    </div>
+
+    <div>
+      <li> Opening Rank</li>
+    </div>
+
+      <div class="chartBox">
+        <canvas  id="OpeningChart" class="chart" height="150px"> </canvas>
+      </div>
+      <div>
+        <li>Closing Rank</li>
+      </div>
+      <div class="chartBox">
+        <canvas id="ClosingChart" class="chart" height="150px"></canvas>
+      </div>
+      
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script>
+        var dataString = '{{ jsdata|safe }}';
+        var Datan = JSON.parse(dataString);
+    
+        // console.log(data);
+
+        years = [];
+        colleges = [];
+        opening_ranks = [];
+        closing_ranks =[];
+        branches =[];
+
+        function removeDuplicates(arr) {
+            return [...new Set(arr)];
+        }
+
+        for(var i = 0;i<Datan.length;i++){
+            years.push(Datan[i].Year);
+            colleges.push(Datan[i].Institute);
+            branches.push(Datan[i].Academic);
+        }
+        colleges = removeDuplicates(colleges);
+        years = removeDuplicates(years);
+        branches = removeDuplicates(branches);
+
+        // console.log(colleges);
+        for(var k = 0 ;k<branches.length ;k++) {
+            temp1 = [];
+            temp2 = [];
+            for(var i = 0; i < years.length; i++){
+                var sum1 = 0;
+                var sum2 = 0;
+                for(var j = 0;j<Datan.length;j++){
+                    if(Datan[j].Academic == branches[k]){
+                        if(Datan[j].Year == years[i]){
+                            sum1 += parseInt( Datan[j].OpeningRank, 10); //don't forget to add the base
+                            sum2 += parseInt( Datan[j].ClosingRank, 10); //don't forget to add the base
+                        }
+                    }
+                }
+                var avg1 = sum1/colleges.length;
+                avg1 = Math.round(avg1);
+                var avg2 = sum2/colleges.length;
+                avg2 = Math.round(avg2);
+                temp1.push(avg1);
+                temp2.push(avg2);
+            }
+            opening_ranks.push(temp1);
+            closing_ranks.push(temp2);
+        }
+        console.log(opening_ranks);
+        console.log(closing_ranks);
+
+
+
+        const label1 = [
+          '2018',
+          '2019',
+          '2020',
+          '2021',
+          '2022',
+         
+        ];
+       const data = {
+       labels: label1,
+       datasets: [{
+       label: 'CSE',
+       data: opening_ranks[0],
+       borderColor: 'rgb(75, 192, 192)',
+       backgroundColor: 'rgb(255,99,132)',
+  },{
+       label: 'EE',
+       data: opening_ranks[1],
+       borderColor: 'rgb(255, 99, 250)',
+       backgroundColor: 'rgb(255,259,0)', 
+},{
+       label: 'ME',
+       data: opening_ranks[2],
+       borderColor: 'rgb(255, 150, 12)',
+       backgroundColor: 'rgb(255,100,0)',
+}]
+};     
+const label2 = [
+          '2018',
+          '2019',
+          '2020',
+          '2021',
+          '2022',
+         
+        ];
+       const data1 = {
+       labels: label2,
+       datasets: [{
+       label: 'CSE',
+       data: closing_ranks[0],
+       borderColor: 'rgb(75, 192, 192)',
+       backgroundColor: 'rgb(255,99,132)',
+  },{
+       label: 'EE',
+       data: closing_ranks[1],
+       borderColor: 'rgb(255, 99, 250)',
+       backgroundColor: 'rgb(255,259,0)', 
+},{
+       label: 'ME',
+       data: closing_ranks[2],
+       borderColor: 'rgb(255, 150, 12)',
+       backgroundColor: 'rgb(255,100,0)',
+}]
+};     
+const config1 = {
+  type: 'line',
+  data: data,
+  options : {
+    plugins: {
+            legend: {
+                display: true,
+                fullSize:false,
+                maxHeight:25,
+                    maxWidth:25,
+                labels: {
+                    maxHeight:20,
+                    maxWidth:20,
+                    boxWidth:15,
+                    textAlign:'right',
+                }
+              }},
+  scales: {
+    
+    y: {
+      title: {
+        display: true,
+        text: 'Opening Ranks'
+      }
+    },
+    x: {
+      title: {
+        display: true,
+        text: 'Years',
+        
+      }
+    },
+    
+  }     
+}
+};
+const config2 = {
+  type: 'line',
+  data: data1,
+  options : {
+    plugins: {
+            legend: {
+                display: true,
+                labels: {
+                    maxHeight:1,
+                    maxWidth:1,
+                    boxWidth:15,
+                }
+              }},
+  scales: {
+    y: {
+      title: {
+        display: true,
+        text: 'Closing Ranks'
+      }
+    },
+    x: {
+      title: {
+        display: true,
+        text: 'Years',
+        
+      }
+    }
+  }     
+}
+};
+        var OpeningChart = new Chart(
+          document.getElementById('OpeningChart'),
+          config1
+        );
+        var ClosingChart = new Chart(
+          document.getElementById('ClosingChart'),
+          config2
+        )
+        
+        window.addEventListener("resize", OpeningChart.resize);
+        
+      </script>
+      
+      
+    
+    {% endblock %}
+  </body> 
+

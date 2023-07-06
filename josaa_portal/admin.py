@@ -1,17 +1,10 @@
 from django.contrib import admin
-from .models import Ques1
-from .models import Ques2
-from .models import Ques3
-from .models import Ques4
-from .models import Datascraped
+
+from .models import Datareq
 from import_export.admin import ImportExportModelAdmin
 
 # Register your models here.
 
-@admin.register(Ques1)
-@admin.register(Ques2)
-@admin.register(Ques3)
-@admin.register(Ques4)
-@admin.register(Datascraped)
+@admin.register(Datareq)
 class ViewAdmin(ImportExportModelAdmin):
     pass

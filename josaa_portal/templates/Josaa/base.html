@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://cdn.tailwindcss.com"></script>
-        <link rel="stylesheet" type = "text/css" href = "{% static 'blog/main.css' %}">
+       
     </head>
     <style>
         .bhole{
@@ -18,10 +18,19 @@
          
             font-size: 2.5vw;
         }
+        .back{
+            background-size:contain;
+
+        }
+        @media screen and (max-width:400px){
+            .bhole{
+                width:5vw;
+            }
+        }
     </style>
 <body>
 
-    <div class="bg-purple-700  line text-center relative top-0">
+    <div class="  line text-center relative top-0 bg-cyan-950">
         
            
             <h1 class="font-extrabold p-4 heading text-white ">
@@ -37,18 +46,18 @@
                 <div class="mt-10 ml-9">
                    
                     <div  style="color:#1F2A33  ">
-                        <a href="#" class=" py-3  hover:text-white rounded-xl hover:bg-black hover:font-semibold transition ease-out duration-300">
-                        <span class="bhole">Search Results</span>
-                        </a>
-                    </div>
-                    <div class="mt-4" style="color:#1F2A33">
-                        <a href="/" class="  py-3 hover:bg-black hover:text-white  rounded-xl hover:font-semibold transition ease-out duration-300">
+                        <a href="/" class=" py-3  hover:text-white rounded-xl hover:bg-black hover:font-semibold transition ease-out duration-300 back">
                         <span class="bhole">Home</span>
                         </a>
                     </div>
                     <div class="mt-4" style="color:#1F2A33">
+                        <a href="#" class="  py-3 hover:bg-black hover:text-white  rounded-xl hover:font-semibold transition ease-out duration-300">
+                        <span class="bhole">About</span>
+                        </a>
+                    </div>
+                    <div class="mt-4" style="color:#1F2A33">
                         <a href="#" class=" py-3 hover:bg-black hover:text-white rounded-xl hover:font-semibold transition ease-out duration-300">
-                        <span class="bhole">Core</span>
+                        <span class="bhole">Contact</span>
                         </a>
                     </div>
                 
