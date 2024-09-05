@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.tailwindcss.com"></script>
+       
+    </head>
+    <style>
+        .bhole{
+            width:2.5vw;
+            height:2vw;
+            padding-left: 5vw;
+            font-size:1.5vw;
+        }
+        .heading{
+         
+            font-size: 2.5vw;
+        }
+        .back{
+            background-size:contain;
+
+        }
+        @media screen and (max-width:400px){
+            .bhole{
+                width:5vw;
+            }
+        }
+    </style>
+<body>
+
+    <div class="  line text-center relative top-0 bg-cyan-950">
+        
+           
+            <h1 class="font-extrabold p-4 heading text-white ">
+                Josaa Data Analysis Portal
+            </h1>
+        
+    </div>
+            
+    
+    <div class="grid grid-cols-5 grid-flow-col  relative">
+        <div class="col-span-1 ">
+            <nav class="h-max">
+                <div class="mt-10 ml-9">
+                   
+                    <div  style="color:#1F2A33  ">
+                        <a href="/" class=" py-3  hover:text-white rounded-xl hover:bg-black hover:font-semibold transition ease-out duration-300 back">
+                        <span class="bhole">Home</span>
+                        </a>
+                    </div>
+                    <div class="mt-4" style="color:#1F2A33">
+                        <a href="#" class="  py-3 hover:bg-black hover:text-white  rounded-xl hover:font-semibold transition ease-out duration-300">
+                        <span class="bhole">About</span>
+                        </a>
+                    </div>
+                    <div class="mt-4" style="color:#1F2A33">
+                        <a href="#" class=" py-3 hover:bg-black hover:text-white rounded-xl hover:font-semibold transition ease-out duration-300">
+                        <span class="bhole">Contact</span>
+                        </a>
+                    </div>
+                
+               
+            </div>
+            </nav>
+           
+            </div>
+           
+           
+    <main class="px-8 py-1 bg-gray-100 col-span-4 ">   
+        {% block content %} {% endblock %} 
+    
+    </main>
+
+    </div>
+
+    
+</div>
+    
+   
+
+</body>
+</html>
